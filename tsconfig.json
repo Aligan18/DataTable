@@ -2,7 +2,7 @@
   "compilerOptions": {
     "target": "ES2020",
     "useDefineForClassFields": true,
-    "lib": ["ESNext.Array", "DOM", "ESNext", "etc..."],
+    "lib": ["ESNext.Array", "DOM", "ESNext", "es2022.array", "ES2023.Array"],
     "module": "ESNext",
     "skipLibCheck": true,
 
