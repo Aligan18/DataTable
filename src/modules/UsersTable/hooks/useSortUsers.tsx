@@ -14,7 +14,7 @@ export function useSortUsers(data?: User[]): useSortUsersReturns {
     const [sortBy, setSortBy] = useState<keyof User | 'none'>("none")
     const [sortAscending, setSortAscending] = useState<boolean>(true)
     const sortUsers = (users: User[], sortBy: keyof User | 'none', ascend: boolean) => {
-        if (sortBy !== 'none') {
+        if (sortBy !== 'none' && users) {
             if (typeof users[0][sortBy] === 'string') {
                 return users.toSorted((a, b) => {
                     const first = a[sortBy] as string
@@ -44,10 +44,9 @@ export function useSortUsers(data?: User[]): useSortUsersReturns {
         return users
 
     }
-    console.log(data)
     let sortedUsers: User[] | [] = []
 
-    if (data) {
+    if (data && data.length !== 0) {
         sortedUsers = sortUsers(data, sortBy, sortAscending)
     }
 
