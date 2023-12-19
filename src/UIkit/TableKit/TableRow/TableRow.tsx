@@ -1,12 +1,12 @@
-import React from 'react'
+import React, { TableHTMLAttributes } from 'react'
 
-export const TableRow = ({ children }: TableRowProps) => {
+export const TableRow = ({ children, ...props }: TableRowProps) => {
     return (
-        <tr>{children}</tr>
+        <tr {...props}>{children}</tr>
 
     )
 }
 
-interface TableRowProps {
+interface TableRowProps extends TableHTMLAttributes<HTMLTableRowElement> {
     children: React.ReactNode
 }
