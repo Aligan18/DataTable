@@ -1,6 +1,0 @@
-export { Button } from './Button/Button'
-export { TextInput } from './TextInput/TextInput'
-export { Title } from './Title/Title'
-export { TableBody } from './TableKit/TableBody/TableBody'
-export { TableHead } from './TableKit/TableHead/TableHead'
-export { TableRow } from './TableKit/TableRow/TableRow'

@@ -1,4 +1,4 @@
-import { TableBody, TableHead } from '@/UIkit'
+import { TableBody, TableHead } from '@/shared'
 
 
 
