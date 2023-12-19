@@ -1,7 +1,8 @@
 
 
+import { SearchUsersByText } from '@/modules/SearchUsersByText'
 import { UsersTable } from '@/modules/UsersTable'
-import { Button, TextInput } from '@/UIkit'
+
 
 
 
@@ -10,10 +11,7 @@ export const HomePage = () => {
   return (
     <div>HomePage
       <div>
-        <TextInput
-          placeholder="Введите текст для фильтрации"
-        />
-        <Button>Найти</Button>
+        <SearchUsersByText />
         <UsersTable />
       </div>
     </div>

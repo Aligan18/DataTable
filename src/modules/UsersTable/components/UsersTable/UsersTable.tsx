@@ -1,5 +1,4 @@
 import { Table } from '@/components'
-import { useState } from 'react'
 import { useSortUsers } from '../../hooks/useSortUsers'
 import { TableHeadTitles, User } from '../../types/User'
 
