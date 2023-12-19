@@ -12,7 +12,9 @@ export function Table<T extends IdType>({ data, titles, onHeadRowClick, onHeadС
                 onHeadRowClick={onHeadRowClick}
                 onHeadСellClick={onHeadСellClick}
             />
-            <TableBody<T> keys={headKeys} data={data} onRowClick={onRowClick} onСellClick={onСellClick} />
+            <TableBody<T> keys={headKeys} data={data}
+                onRowClick={onRowClick}
+                onСellClick={onСellClick} />
         </table>
     )
 }
@@ -22,7 +24,7 @@ interface TableProps<T> {
     titles: Record<keyof T, string>
     onHeadRowClick?: (event: React.MouseEvent<HTMLTableRowElement>) => void
     onHeadСellClick?: (event: React.MouseEvent<HTMLTableCellElement>, title: keyof T) => void
-    onRowClick?: (event: React.MouseEvent<HTMLTableRowElement>) => void
+    onRowClick?: (event: React.MouseEvent<HTMLTableRowElement>, item: T) => void
     onСellClick?: (event: React.MouseEvent<HTMLTableCellElement>) => void
 }
 
