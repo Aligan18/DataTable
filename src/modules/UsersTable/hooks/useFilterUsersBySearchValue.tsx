@@ -4,7 +4,7 @@ import { User } from "../types/User";
 
 
 
-export const useFilterUsersByText = (users?: User[]) => {
+export const useFilterUsersBySearchValue = (users?: User[]) => {
     const filterBy = useAppSelector(state => state.filtereUsers.filterBy)
 
     function filterUsersByText(subtitle: string, users?: User[],) {

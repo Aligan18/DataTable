@@ -1,7 +1,6 @@
 import { Table } from '@/components'
-import { useAppSelector } from '@/shared'
 import { useGetUsersQuery } from '../../api/fetchUsers'
-import { useFilterUsersByText } from '../../hooks/useFilterUsersByText'
+import { useFilterUsersBySearchValue } from '../../hooks/useFilterUsersBySearchValue'
 import { useSortUsers } from '../../hooks/useSortUsers'
 import { TableHeadTitles, User } from '../../types/User'
 
@@ -17,7 +16,7 @@ const titles: TableHeadTitles = {
 export const UsersTable = () => {
     const { data: users, isLoading, error } = useGetUsersQuery()
 
-    const { filteredUsers } = useFilterUsersByText(users)
+    const { filteredUsers } = useFilterUsersBySearchValue(users)
     const { setSortAscending,
         setSortBy,
         sortedUsers: filteredAndSortedUsers
