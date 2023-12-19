@@ -1,4 +1,6 @@
 import { Table } from '@/components'
+import { useAppSelector } from '@/shared'
+import { FC, useState } from 'react'
 import { useGetUsersQuery } from '../../api/fetchUsers'
 import { useFilterUsersBySearchValue } from '../../hooks/useFilterUsersBySearchValue'
 import { useSortUsers } from '../../hooks/useSortUsers'
@@ -13,10 +15,11 @@ const titles: TableHeadTitles = {
     "phone": "Телефон"
 }
 
-export const UsersTable = () => {
-    const { data: users, isLoading, error } = useGetUsersQuery()
+export const UsersTable: FC = () => {
+    const { currentPage, limit } = useAppSelector(state => state.currentPage)
+    const { data, isLoading, error } = useGetUsersQuery({ page: currentPage, limit: limit })
 
-    const { filteredUsers } = useFilterUsersBySearchValue(users)
+    const { filteredUsers } = useFilterUsersBySearchValue(data?.users)
     const { setSortAscending,
         setSortBy,
         sortedUsers: filteredAndSortedUsers
@@ -29,8 +32,8 @@ export const UsersTable = () => {
     }
 
     return (<>
-        {users ?
-            <Table data={filteredAndSortedUsers} titles={titles} onHeadСellClick={handleSelectSortBy} />
+        {filteredAndSortedUsers ?
+            < Table data={filteredAndSortedUsers} titles={titles} onHeadСellClick={handleSelectSortBy} />
             :
             <h1>Пользователи не найдены</h1>
         }

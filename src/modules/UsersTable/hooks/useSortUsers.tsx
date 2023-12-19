@@ -12,7 +12,7 @@ interface useSortUsersReturns {
 
 export function useSortUsers(data?: User[]): useSortUsersReturns {
     const [sortBy, setSortBy] = useState<keyof User | 'none'>("none")
-    const [sortAscending, setSortAscending] = useState<boolean>(true)
+    const [sortAscending, setSortAscending] = useState<boolean>(false)
     const sortUsers = (users: User[], sortBy: keyof User | 'none', ascend: boolean) => {
         if (sortBy !== 'none' && users) {
             if (typeof users[0][sortBy] === 'string') {
