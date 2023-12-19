@@ -16,11 +16,14 @@ export const filterUsersSlice = createSlice({
     reducers: {
         setFilterBy: (state, action: PayloadAction<string>) => {
             state.filterBy = action.payload
+        },
+        clearFilter: (state) => {
+            state.filterBy = ''
         }
     },
 })
 
 // Action creators are generated for each case reducer function
-export const { setFilterBy } = filterUsersSlice.actions
+export const { setFilterBy, clearFilter } = filterUsersSlice.actions
 
 export const filterUsersReducer = filterUsersSlice.reducer
