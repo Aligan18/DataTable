@@ -1,3 +1,4 @@
+
 import { IdType } from '../../../../components/Table/Table'
 
 import { TableRow } from '../TableRow/TableRow'
@@ -10,7 +11,7 @@ export function TableBody<T extends IdType>({ data, keys, onRowClick, onСellCli
         <tbody>
             {data.map(item => (
                 <TableRow key={('id' in item) ? item.id : item._id}
-                    onClick={onRowClick ? (e) => onRowClick(e) : undefined}
+                    onClick={onRowClick ? (e) => onRowClick(e, item) : undefined}
                 >
                     {keys.map(key =>
                         <td key={String(key)} onClick={onСellClick ? (e) => onСellClick(e) : undefined}>
@@ -25,6 +26,6 @@ export function TableBody<T extends IdType>({ data, keys, onRowClick, onСellCli
 interface TableBodyProps<T> {
     data: T[]
     keys: Array<keyof T>
-    onRowClick?: (event: React.MouseEvent<HTMLTableRowElement>) => void
+    onRowClick?: (event: React.MouseEvent<HTMLTableRowElement>, item: T) => void
     onСellClick?: (event: React.MouseEvent<HTMLTableCellElement>) => void
 }
