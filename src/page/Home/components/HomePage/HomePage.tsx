@@ -1,8 +1,16 @@
-import React from 'react'
-import { Button } from '@/UIkit'
+
+import { Button, Table, TextInput } from '@/UIkit'
 
 
-const data = [
+interface User {
+  _id: number,
+  firstName: string
+  lastName: string
+  email: string
+  phone: string
+}
+
+const data: User[] = [
   {
     "_id": 296,
     "firstName": "Selma Terry",
@@ -200,41 +208,27 @@ const data = [
     "phone": "+1 (864) 568-3231"
   }]
 
+
+
+
+const titles: Record<keyof User, string> = {
+  "_id": 'ID',
+  "firstName": "Имя",
+  "lastName": "Фамилия",
+  "email": "Email",
+  "phone": "Телефон"
+}
+
 export const HomePage = () => {
   return (
     <div>HomePage
       <div>
-        <input
-          type="text"
+        <TextInput
           placeholder="Введите текст для фильтрации"
         />
         <Button>Найти</Button>
-
-        <table>
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Имя</th>
-              <th>Фамилия</th>
-              <th>Email</th>
-              <th>Телефон</th>
-            </tr>
-          </thead>
-          <tbody>
-            {data.map(item => (
-              <tr key={item._id}>
-                <td>{item._id}</td>
-                <td>{item.firstName}</td>
-                <td>{item.lastName}</td>
-                <td>{item.email}</td>
-                <td>{item.phone}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        <Table data={data} titles={titles} />
       </div>
-
-
     </div>
   )
 }
