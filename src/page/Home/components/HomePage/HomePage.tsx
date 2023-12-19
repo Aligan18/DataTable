@@ -1,19 +1,20 @@
 
 
+import { FilteredByTag } from '@/modules/FilteredByTag'
+import { SearchUsersByText } from '@/modules/SearchUsersByText'
 import { UsersTable } from '@/modules/UsersTable'
-import { Button, TextInput } from '@/UIkit'
+
 
 
 
 
 export const HomePage = () => {
   return (
-    <div>HomePage
+    <div>
+      <h1>DataTable</h1>
       <div>
-        <TextInput
-          placeholder="Введите текст для фильтрации"
-        />
-        <Button>Найти</Button>
+        <SearchUsersByText />
+        <FilteredByTag />
         <UsersTable />
       </div>
     </div>

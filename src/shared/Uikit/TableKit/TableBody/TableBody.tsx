@@ -1,4 +1,4 @@
-import { IdType } from '../../../components/Table/Table'
+import { IdType } from '../../../../components/Table/Table'
 
 import { TableRow } from '../TableRow/TableRow'
 

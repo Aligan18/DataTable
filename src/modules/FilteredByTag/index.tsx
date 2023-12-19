@@ -1,0 +1,1 @@
+export { FilteredByTag } from "./components/FilteredByTag/FilteredByTag"
