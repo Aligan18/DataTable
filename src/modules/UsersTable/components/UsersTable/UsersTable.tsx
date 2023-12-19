@@ -1,6 +1,7 @@
 import { Table } from '@/components'
 import { useAppSelector } from '@/shared'
 import { useGetUsersQuery } from '../../api/fetchUsers'
+import { useFilterUsersByText } from '../../hooks/useFilterUsersByText'
 import { useSortUsers } from '../../hooks/useSortUsers'
 import { TableHeadTitles, User } from '../../types/User'
 
@@ -15,25 +16,8 @@ const titles: TableHeadTitles = {
 
 export const UsersTable = () => {
     const { data: users, isLoading, error } = useGetUsersQuery()
-    const filterBy = useAppSelector(state => state.filtereUsers.filterBy)
 
-    function filterUsersByText(subtitle: string, users?: User[],) {
-        if (subtitle.trim() !== '' && users !== undefined) {
-            return users.filter(user => {
-                // Производим фильтрацию по подстроке в имени, фамилии, email или телефоне
-                const searchString = Object.values(user).join(' ');
-                return searchString.toLowerCase().includes(subtitle.toLowerCase());
-            });
-        }
-        return users
-    }
-
-
-    const filteredUsers = filterUsersByText(filterBy, users,)
-
-
-
-
+    const { filteredUsers } = useFilterUsersByText(users)
     const { setSortAscending,
         setSortBy,
         sortedUsers: filteredAndSortedUsers
