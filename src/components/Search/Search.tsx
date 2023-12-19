@@ -1,5 +1,5 @@
 import { ForwardedRef } from "react"
-import { Button, TextInput } from "@/UIkit"
+import { Button, TextInput } from "@/shared"
 import { forwardRef, InputHTMLAttributes } from "react"
 
 

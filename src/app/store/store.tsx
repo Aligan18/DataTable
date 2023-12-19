@@ -1,8 +1,16 @@
 import { configureStore } from '@reduxjs/toolkit'
-import { filteredUsersReducer } from '@/modules/SearchUsersByText'
+import { filterUsersReducer } from '@/modules/SearchUsersByText'
+import { userApi } from '@/modules/UsersTable'
 
 export const store = configureStore({
-    reducer: { filteredUsers: filteredUsersReducer },
+    reducer:
+
+    {
+        filtereUsers: filterUsersReducer,
+        [userApi.reducerPath]: userApi.reducer
+    },
+    middleware: (getDefaultMiddleware) =>
+        getDefaultMiddleware().concat(userApi.middleware),
 })
 
 
