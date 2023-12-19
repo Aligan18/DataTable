@@ -1,14 +1,10 @@
 import { Table } from '@/components'
 import { useState } from 'react'
+import { useSortUsers } from '../../hooks/useSortUsers'
+import { TableHeadTitles, User } from '../../types/User'
 
 
-interface User {
-    _id: number,
-    firstName: string
-    lastName: string
-    email: string
-    phone: string
-}
+
 
 const data: User[] = [
     {
@@ -208,8 +204,7 @@ const data: User[] = [
         "phone": "+1 (864) 568-3231"
     }]
 
-
-const titles: Record<keyof User, string> = {
+const titles: TableHeadTitles = {
     "_id": 'ID',
     "firstName": "Имя",
     "lastName": "Фамилия",
@@ -218,45 +213,11 @@ const titles: Record<keyof User, string> = {
 }
 
 
+
 export const UsersTable = () => {
-    const [sortBy, setSortBy] = useState<keyof User | 'none'>("none")
-    const [sortAscending, setSortAscending] = useState<boolean>(true)
 
-    function sortUsers(users: User[], sortBy: keyof User | 'none', ascend: boolean) {
-        if (sortBy !== 'none') {
-            if (typeof users[0][sortBy] === 'string') {
-                return users.sort((a, b) => {
-                    const first = a[sortBy] as string
-                    const second = b[sortBy] as string
-                    if (ascend) {
-                        return first.toLowerCase() < second.toLowerCase() ? -1 : 1
-                    }
-                    else {
-                        return first.toLowerCase() > second.toLowerCase() ? -1 : 1
-                    }
-                })
-            }
-            else if (typeof users[0][sortBy] === 'number') {
-                return users.sort((a, b) => {
-                    const first = a[sortBy] as number
-                    const second = b[sortBy] as number
-                    if (ascend) {
-                        return first - second
-                    }
-                    else {
-                        return second - first
-                    }
-                })
-            }
+    const { setSortAscending, setSortBy, sortedUsers } = useSortUsers(data)
 
-        }
-        return users
-
-    }
-
-    const sortedUsers = sortUsers(data, sortBy, sortAscending)
-
-    console.log(sortBy)
     const handleSelectSortBy = (e: React.MouseEvent<HTMLTableCellElement>, tableHeadKey: keyof User) => {
         e.preventDefault()
         setSortBy(tableHeadKey)
