@@ -13,7 +13,7 @@ interface getUsersReaponse {
 
 export const userApi = createApi({
     reducerPath: 'userApi',
-    baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:3000' }),
+    baseQuery: fetchBaseQuery({ baseUrl: 'https://datatableserver.onrender.com' }),
     endpoints: (builder) => ({
         getUsers: builder.query<getUsersReaponse, getUsersProps>({
             query: ({ page = 1, limit = 50 }) => (
