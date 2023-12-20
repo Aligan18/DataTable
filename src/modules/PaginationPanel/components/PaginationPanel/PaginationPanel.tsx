@@ -7,6 +7,7 @@ import { setSelectedUser } from "@/modules/SelectedTableRow"
 
 
 export const PaginationPanel = () => {
+    const filterBy = useAppSelector(state => state.filtereUsers.filterBy)
     const { limit, currentPage } = useAppSelector(state => state.currentPage)
     const { data } = useGetUsersQuery({ limit: limit, page: currentPage })
     console.log(data)
@@ -23,7 +24,7 @@ export const PaginationPanel = () => {
     return (<>
 
         <div className={classes.panel}>
-            {data?.totalCount &&
+            {data?.totalCount && !filterBy &&
                 <Pagination totalItems={data?.totalCount}
                     itemsPerPage={limit}
                     onPageChange={onPageChange}

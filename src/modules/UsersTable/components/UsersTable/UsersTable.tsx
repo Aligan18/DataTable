@@ -46,21 +46,25 @@ export const UsersTable: FC = () => {
             <Loader />
             :
             <>{
-                filteredAndSortedUsers && !error ?
-                    <Table
-                        sortAscending={sortAscending}
-                        sortBy={sortBy}
-                        activeId={selectedUser?._id}
-                        data={filteredAndSortedUsers}
-                        titles={titles}
-                        onHeadСellClick={handleSelectSortBy}
-                        onRowClick={onRowClick}
-                    />
-                    : <>
-                        {error && 'error' in error ? <ErrorText>{error.error}</ErrorText>
+                !error ?
+                    <>
+                        {filteredAndSortedUsers.length ?
+                            <Table
+                                sortAscending={sortAscending}
+                                sortBy={sortBy}
+                                activeId={selectedUser?._id}
+                                data={filteredAndSortedUsers}
+                                titles={titles}
+                                onHeadСellClick={handleSelectSortBy}
+                                onRowClick={onRowClick} />
                             :
-                            <h1>Пользователи не найдены</h1>
+                            <h2>Пользователи не найдены</h2>
+
                         }
+                    </>
+                    :
+                    <>
+                        {(error && 'error' in error) && <ErrorText>{error.error}</ErrorText>}
                     </>
             }</>
         }
