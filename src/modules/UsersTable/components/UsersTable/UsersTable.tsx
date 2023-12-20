@@ -18,6 +18,7 @@ export const titles: TableHeadTitles = {
 
 export const UsersTable: FC = () => {
     const { currentPage, limit } = useAppSelector(state => state.currentPage)
+    const selectedUser = useAppSelector(state => state.selectedUser.selectedUser)
     const { data, isLoading, error } = useGetUsersQuery({ page: currentPage, limit: limit })
     const dispatch = useAppDispatch()
     const { filteredUsers } = useFilterUsersBySearchValue(data?.users)
@@ -44,7 +45,9 @@ export const UsersTable: FC = () => {
             :
             <>{
                 filteredAndSortedUsers && !error ?
-                    <Table data={filteredAndSortedUsers}
+                    <Table
+
+                        data={filteredAndSortedUsers}
                         titles={titles}
                         onHeadСellClick={handleSelectSortBy}
                         onRowClick={onRowClick}

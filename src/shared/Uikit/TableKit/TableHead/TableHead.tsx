@@ -1,14 +1,20 @@
 
 import { TableHTMLAttributes } from 'react'
 import { TableRow } from '../TableRow/TableRow'
+import classes from './TableHead.module.scss'
+import cn from 'clsx'
 
 export function TableHead<T>({ titles, onHeadRowClick, onHeadСellClick, ...props }: TableHeadProps<T>) {
     const keysOfTitles = Object.keys(titles) as (keyof T)[]
     return (
         <thead >
-            <TableRow onClick={onHeadRowClick ? (e) => onHeadRowClick(e) : undefined} {...props}>
+            <TableRow
+                onClick={onHeadRowClick ? (e) => onHeadRowClick(e) : undefined}
+                {...props}>
                 {keysOfTitles.map(keyOfTitle =>
-                    <th key={String(keyOfTitle)} onClick={onHeadСellClick ? (e) => onHeadСellClick(e, keyOfTitle) : undefined}
+                    <th className={cn({ [classes.pointer]: onHeadСellClick ? true : false })}
+                        key={String(keyOfTitle)}
+                        onClick={onHeadСellClick ? (e) => onHeadСellClick(e, keyOfTitle) : undefined}
                     >
                         {titles[keyOfTitle]}
                     </th>

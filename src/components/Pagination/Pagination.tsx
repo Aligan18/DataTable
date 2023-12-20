@@ -1,5 +1,6 @@
 import { Button } from '@/shared';
-
+import classes from './Pagination.module.scss'
+import cn from 'clsx';
 
 export const Pagination = ({ totalItems, itemsPerPage, onPageChange, currentPage }: PaginationProps) => {
     const totalPages = Math.ceil(totalItems / itemsPerPage);
@@ -15,7 +16,7 @@ export const Pagination = ({ totalItems, itemsPerPage, onPageChange, currentPage
             pageNumbers.push(
                 <li
                     key={i}
-                    className={i === currentPage ? 'active' : ''}
+                    className={cn(classes.li, { [classes.active]: i === currentPage })}
                     onClick={() => handlePageChange(i)}
                 >
                     {i}
@@ -26,7 +27,7 @@ export const Pagination = ({ totalItems, itemsPerPage, onPageChange, currentPage
     };
 
     return (
-        <div className="pagination">
+        <div className={classes.pagination}>
 
             <Button
                 onClick={() => handlePageChange(currentPage - 1)}
@@ -34,7 +35,7 @@ export const Pagination = ({ totalItems, itemsPerPage, onPageChange, currentPage
             >
                 &laquo; Prev
             </Button>
-            <ul>
+            <ul className={classes.ul}>
                 {renderPageNumbers()}
             </ul>
             <Button

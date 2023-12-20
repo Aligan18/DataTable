@@ -1,0 +1,26 @@
+.pagination {
+    width: fit-content;
+    display: flex;
+    border: 1px solid var(--gray);
+    border-radius:10px;
+
+}
+
+.ul{
+    
+    list-style: none;
+    padding: 0px;
+}
+
+.li {
+    cursor: pointer;
+  display: inline-block;
+  margin-right: 30px; 
+  &:last-child{
+    margin-right: 30px; 
+  }
+  &:first-child{
+    margin-left: 30px; 
+  }
+}
+

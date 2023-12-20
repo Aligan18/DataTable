@@ -1,13 +1,13 @@
 import { ForwardedRef } from "react"
 import { Button, TextInput } from "@/shared"
 import { forwardRef, InputHTMLAttributes } from "react"
-
+import classes from "./Search.module.scss"
 
 
 
 export const Search = forwardRef(({ handleClickSearchButton, ...props }: SearchProps, ref: ForwardedRef<HTMLInputElement>) => {
     return (
-        <form>
+        <form className={classes.search}>
             <TextInput ref={ref}
                 {...props}
             />
