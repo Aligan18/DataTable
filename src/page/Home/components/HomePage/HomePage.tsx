@@ -5,6 +5,7 @@ import { PaginationPanel } from '@/modules/PaginationPanel'
 import { SearchUsersByText } from '@/modules/SearchUsersByText'
 import { SelectedTableRow } from '@/modules/SelectedTableRow'
 import { UsersTable } from '@/modules/UsersTable'
+import { ErrorText, Loader } from '@/shared'
 
 
 
@@ -20,6 +21,7 @@ export const HomePage = () => {
         <UsersTable />
         <SelectedTableRow />
         <PaginationPanel />
+        <ErrorText>Произошда ошибка </ErrorText>
       </div>
     </div>
   )

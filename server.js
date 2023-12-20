@@ -1,6 +1,5 @@
-// See https://github.com/typicode/json-server#module
 import  jsonServer  from 'json-server'
-
+// "server": "json-server --watch db.json"
 export const server = jsonServer.create()
 
 // Uncomment to allow write operations
@@ -27,4 +26,4 @@ server.listen(3000, () => {
     console.log('JSON Server is running')
 })
 
-// Export the Server API
+
