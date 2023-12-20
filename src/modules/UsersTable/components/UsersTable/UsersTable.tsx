@@ -1,6 +1,6 @@
 import { Table } from '@/components'
 import { setSelectedUser } from '@/modules/SelectedTableRow'
-import { useAppDispatch, useAppSelector } from '@/shared'
+import { ErrorText, Loader, useAppDispatch, useAppSelector } from '@/shared'
 import { FC } from 'react'
 import { useGetUsersQuery } from '../../api/fetchUsers'
 import { useFilterUsersBySearchValue } from '../../hooks/useFilterUsersBySearchValue'
@@ -36,17 +36,28 @@ export const UsersTable: FC = () => {
         e.preventDefault()
         dispatch(setSelectedUser(currentRow))
     }
+    console.log(error)
 
     return (<>
-        {filteredAndSortedUsers ?
-            < Table data={filteredAndSortedUsers}
-                titles={titles}
-                onHeadСellClick={handleSelectSortBy}
-                onRowClick={onRowClick}
-            />
+        {isLoading ?
+            <Loader />
             :
-            <h1>Пользователи не найдены</h1>
+            <>{
+                filteredAndSortedUsers && !error ?
+                    <Table data={filteredAndSortedUsers}
+                        titles={titles}
+                        onHeadСellClick={handleSelectSortBy}
+                        onRowClick={onRowClick}
+                    />
+                    : <>
+                        {error && 'error' in error ? <ErrorText>{error.error}</ErrorText>
+                            :
+                            <h1>Пользователи не найдены</h1>
+                        }
+                    </>
+            }</>
         }
+
     </>
 
     )

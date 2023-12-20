@@ -10,8 +10,10 @@ import { UsersTable } from '@/modules/UsersTable'
 
 
 
+
 export const HomePage = () => {
   return (
+
     <div>
       <h1>DataTable</h1>
       <div>
@@ -22,5 +24,6 @@ export const HomePage = () => {
         <PaginationPanel />
       </div>
     </div>
+
   )
 }
