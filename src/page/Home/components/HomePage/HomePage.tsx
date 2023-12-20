@@ -15,7 +15,9 @@ export const HomePage = () => {
   return (
 
     <main>
-      <h1>DataTable</h1>
+      <div className={classes.title}>
+        <h1>DataTable</h1>
+      </div>
       <article className={classes.wrapper}>
 
         <SearchUsersByText />

@@ -23,6 +23,8 @@ export const UsersTable: FC = () => {
     const dispatch = useAppDispatch()
     const { filteredUsers } = useFilterUsersBySearchValue(data?.users)
     const { setSortAscending,
+        sortAscending,
+        sortBy,
         setSortBy,
         sortedUsers: filteredAndSortedUsers
     } = useSortUsers(filteredUsers)
@@ -46,6 +48,8 @@ export const UsersTable: FC = () => {
             <>{
                 filteredAndSortedUsers && !error ?
                     <Table
+                        sortAscending={sortAscending}
+                        sortBy={sortBy}
                         activeId={selectedUser?._id}
                         data={filteredAndSortedUsers}
                         titles={titles}
