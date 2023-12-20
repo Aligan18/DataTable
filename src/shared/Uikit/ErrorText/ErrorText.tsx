@@ -4,7 +4,7 @@ import classes from './ErrorText.module.scss'
 
 export const ErrorText = ({ children }: ErrorTextProps) => {
     return (
-        <p className={classes.error}>{children}</p>
+        <h2 className={classes.error}>{children}</h2>
     )
 }
 
