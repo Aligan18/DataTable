@@ -1,12 +1,13 @@
 import { Button } from '@/shared';
-import React, { useState } from 'react';
+import classes from './Pagination.module.scss'
+import cn from 'clsx';
 
-export const Pagination = ({ totalItems, itemsPerPage, onPageChange }: PaginationProps) => {
+export const Pagination = ({ totalItems, itemsPerPage, onPageChange, currentPage, onButtonClick }: PaginationProps) => {
     const totalPages = Math.ceil(totalItems / itemsPerPage);
-    const [currentPage, setCurrentPage] = useState(1);
+
 
     const handlePageChange = (page: number) => {
-        setCurrentPage(page);
+        onButtonClick()
         onPageChange(page);
     };
 
@@ -16,7 +17,7 @@ export const Pagination = ({ totalItems, itemsPerPage, onPageChange }: Paginatio
             pageNumbers.push(
                 <li
                     key={i}
-                    className={i === currentPage ? 'active' : ''}
+                    className={cn(classes.li, { [classes.active]: i === currentPage })}
                     onClick={() => handlePageChange(i)}
                 >
                     {i}
@@ -27,7 +28,7 @@ export const Pagination = ({ totalItems, itemsPerPage, onPageChange }: Paginatio
     };
 
     return (
-        <div className="pagination">
+        <div className={classes.pagination}>
 
             <Button
                 onClick={() => handlePageChange(currentPage - 1)}
@@ -35,7 +36,7 @@ export const Pagination = ({ totalItems, itemsPerPage, onPageChange }: Paginatio
             >
                 &laquo; Prev
             </Button>
-            <ul>
+            <ul className={classes.ul}>
                 {renderPageNumbers()}
             </ul>
             <Button
@@ -50,6 +51,8 @@ export const Pagination = ({ totalItems, itemsPerPage, onPageChange }: Paginatio
 };
 
 interface PaginationProps {
+    onButtonClick: () => void
+    currentPage: number
     totalItems: number
     itemsPerPage: number
     onPageChange: (page: number) => void

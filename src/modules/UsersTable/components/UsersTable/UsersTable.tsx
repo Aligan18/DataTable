@@ -1,6 +1,6 @@
 import { Table } from '@/components'
 import { setSelectedUser } from '@/modules/SelectedTableRow'
-import { useAppDispatch, useAppSelector } from '@/shared'
+import { ErrorText, Loader, useAppDispatch, useAppSelector } from '@/shared'
 import { FC } from 'react'
 import { useGetUsersQuery } from '../../api/fetchUsers'
 import { useFilterUsersBySearchValue } from '../../hooks/useFilterUsersBySearchValue'
@@ -18,10 +18,13 @@ export const titles: TableHeadTitles = {
 
 export const UsersTable: FC = () => {
     const { currentPage, limit } = useAppSelector(state => state.currentPage)
+    const selectedUser = useAppSelector(state => state.selectedUser.selectedUser)
     const { data, isLoading, error } = useGetUsersQuery({ page: currentPage, limit: limit })
     const dispatch = useAppDispatch()
     const { filteredUsers } = useFilterUsersBySearchValue(data?.users)
     const { setSortAscending,
+        sortAscending,
+        sortBy,
         setSortBy,
         sortedUsers: filteredAndSortedUsers
     } = useSortUsers(filteredUsers)
@@ -36,17 +39,32 @@ export const UsersTable: FC = () => {
         e.preventDefault()
         dispatch(setSelectedUser(currentRow))
     }
+    console.log(error)
 
     return (<>
-        {filteredAndSortedUsers ?
-            < Table data={filteredAndSortedUsers}
-                titles={titles}
-                onHeadСellClick={handleSelectSortBy}
-                onRowClick={onRowClick}
-            />
+        {isLoading ?
+            <Loader />
             :
-            <h1>Пользователи не найдены</h1>
+            <>{
+                filteredAndSortedUsers && !error ?
+                    <Table
+                        sortAscending={sortAscending}
+                        sortBy={sortBy}
+                        activeId={selectedUser?._id}
+                        data={filteredAndSortedUsers}
+                        titles={titles}
+                        onHeadСellClick={handleSelectSortBy}
+                        onRowClick={onRowClick}
+                    />
+                    : <>
+                        {error && 'error' in error ? <ErrorText>{error.error}</ErrorText>
+                            :
+                            <h1>Пользователи не найдены</h1>
+                        }
+                    </>
+            }</>
         }
+
     </>
 
     )

@@ -2,17 +2,20 @@ import { TableBody, TableHead } from '@/shared'
 
 
 
-export function Table<T extends IdType>({ data, titles, onHeadRowClick, onHeadСellClick, onRowClick, onСellClick }: TableProps<T>) {
+export function Table<T extends IdType>({ sortAscending, sortBy, activeId, data, titles, onHeadRowClick, onHeadСellClick, onRowClick, onСellClick }: TableProps<T>) {
 
     const headKeys = Object.keys(titles) as (keyof T)[]
 
     return (
         <table>
             <TableHead titles={titles}
+                sortAscending={sortAscending}
+                sortBy={sortBy}
                 onHeadRowClick={onHeadRowClick}
                 onHeadСellClick={onHeadСellClick}
             />
             <TableBody<T> keys={headKeys} data={data}
+                activeId={activeId}
                 onRowClick={onRowClick}
                 onСellClick={onСellClick} />
         </table>
@@ -21,6 +24,9 @@ export function Table<T extends IdType>({ data, titles, onHeadRowClick, onHeadС
 
 interface TableProps<T> {
     data: T[]
+    sortAscending: boolean
+    sortBy: keyof T | "none"
+    activeId?: number | string
     titles: Record<keyof T, string>
     onHeadRowClick?: (event: React.MouseEvent<HTMLTableRowElement>) => void
     onHeadСellClick?: (event: React.MouseEvent<HTMLTableCellElement>, title: keyof T) => void

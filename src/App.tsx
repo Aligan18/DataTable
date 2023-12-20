@@ -1,5 +1,5 @@
 
-import './App.css'
+import './App.scss'
 import { HomePage } from '@/page/Home'
 
 function App() {
