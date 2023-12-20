@@ -1,12 +1,11 @@
 import { Button } from '@/shared';
-import React, { useState } from 'react';
 
-export const Pagination = ({ totalItems, itemsPerPage, onPageChange }: PaginationProps) => {
+
+export const Pagination = ({ totalItems, itemsPerPage, onPageChange, currentPage }: PaginationProps) => {
     const totalPages = Math.ceil(totalItems / itemsPerPage);
-    const [currentPage, setCurrentPage] = useState(1);
+
 
     const handlePageChange = (page: number) => {
-        setCurrentPage(page);
         onPageChange(page);
     };
 
@@ -50,6 +49,7 @@ export const Pagination = ({ totalItems, itemsPerPage, onPageChange }: Paginatio
 };
 
 interface PaginationProps {
+    currentPage: number
     totalItems: number
     itemsPerPage: number
     onPageChange: (page: number) => void

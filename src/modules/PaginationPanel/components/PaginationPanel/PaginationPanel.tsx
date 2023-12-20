@@ -8,6 +8,7 @@ import { setCurrentPage } from "../../store/currentPageSlice"
 export const PaginationPanel = () => {
     const { limit, currentPage } = useAppSelector(state => state.currentPage)
     const { data } = useGetUsersQuery({ limit: limit, page: currentPage })
+    console.log(data)
     const dispatch = useAppDispatch()
 
     const onPageChange = (page: number) => {
@@ -19,7 +20,7 @@ export const PaginationPanel = () => {
 
         <div>
             {data?.totalCount &&
-                <Pagination totalItems={data?.totalCount} itemsPerPage={limit} onPageChange={onPageChange} />
+                <Pagination totalItems={data?.totalCount} itemsPerPage={limit} onPageChange={onPageChange} currentPage={currentPage} />
             }
         </div>
 
