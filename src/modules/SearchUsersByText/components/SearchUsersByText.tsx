@@ -1,4 +1,5 @@
 import { Search } from "@/components"
+import { setSelectedUser } from "@/modules/SelectedTableRow";
 
 import { useAppDispatch } from "@/shared";
 import { useRef } from "react"
@@ -13,6 +14,7 @@ export const SearchUsersByText = () => {
     const handleSearch = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault()
         const filterBy = ref.current ? ref.current.value : ''
+        dispatch(setSelectedUser(null))
         dispatch(setFilterBy((filterBy)))
     }
 

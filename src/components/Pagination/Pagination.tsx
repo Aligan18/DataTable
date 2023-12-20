@@ -2,11 +2,12 @@ import { Button } from '@/shared';
 import classes from './Pagination.module.scss'
 import cn from 'clsx';
 
-export const Pagination = ({ totalItems, itemsPerPage, onPageChange, currentPage }: PaginationProps) => {
+export const Pagination = ({ totalItems, itemsPerPage, onPageChange, currentPage, onButtonClick }: PaginationProps) => {
     const totalPages = Math.ceil(totalItems / itemsPerPage);
 
 
     const handlePageChange = (page: number) => {
+        onButtonClick()
         onPageChange(page);
     };
 
@@ -50,6 +51,7 @@ export const Pagination = ({ totalItems, itemsPerPage, onPageChange, currentPage
 };
 
 interface PaginationProps {
+    onButtonClick: () => void
     currentPage: number
     totalItems: number
     itemsPerPage: number

@@ -46,7 +46,7 @@ export const UsersTable: FC = () => {
             <>{
                 filteredAndSortedUsers && !error ?
                     <Table
-
+                        activeId={selectedUser?._id}
                         data={filteredAndSortedUsers}
                         titles={titles}
                         onHeadСellClick={handleSelectSortBy}
