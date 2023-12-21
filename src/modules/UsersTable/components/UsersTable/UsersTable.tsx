@@ -1,7 +1,7 @@
 import { Table } from '@/components'
 import { setSelectedUser } from '@/modules/SelectedTableRow'
 import { ErrorText, Loader, useAppDispatch, useAppSelector } from '@/shared'
-import { FC } from 'react'
+import { FC, useEffect, useRef, useState } from 'react'
 import { useGetUsersQuery } from '../../api/fetchUsers'
 import { useFilterUsersBySearchValue } from '../../hooks/useFilterUsersBySearchValue'
 import { useSortUsers } from '../../hooks/useSortUsers'
@@ -17,11 +17,19 @@ export const titles: TableHeadTitles = {
 }
 
 export const UsersTable: FC = () => {
+    const isFirstTime = useRef(true)
     const { currentPage, limit } = useAppSelector(state => state.currentPage)
     const selectedUser = useAppSelector(state => state.selectedUser.selectedUser)
     const { data, isLoading, error } = useGetUsersQuery({ page: currentPage, limit: limit })
     const dispatch = useAppDispatch()
     const { filteredUsers } = useFilterUsersBySearchValue(data?.users)
+
+    useEffect(() => {
+        if (!isLoading) {
+            isFirstTime.current = false
+        }
+    }, [])
+
     const { setSortAscending,
         sortAscending,
         sortBy,
@@ -34,7 +42,7 @@ export const UsersTable: FC = () => {
         setSortBy(tableHeadKey)
         setSortAscending(prev => !prev)
     }
-
+    console.log(isLoading)
     const onRowClick = (e: React.MouseEvent<HTMLTableRowElement>, currentRow: User) => {
         e.preventDefault()
         dispatch(setSelectedUser(currentRow))
@@ -43,7 +51,10 @@ export const UsersTable: FC = () => {
 
     return (<>
         {isLoading ?
-            <Loader />
+            <>
+                {isFirstTime.current && <h2>Первое подключение к серверу может занять некоторое время.</h2>}
+                <Loader />
+            </>
             :
             <>{
                 !error ?
