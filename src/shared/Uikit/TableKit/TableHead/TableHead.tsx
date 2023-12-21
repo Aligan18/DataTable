@@ -6,7 +6,7 @@ import cn from 'clsx'
 
 export function TableHead<T>({ titles, onHeadRowClick, onHeadСellClick, sortAscending, sortBy, ...props }: TableHeadProps<T>) {
     const keysOfTitles = Object.keys(titles) as (keyof T)[]
-    console.log(sortBy)
+
     return (
         <thead >
             <TableRow
