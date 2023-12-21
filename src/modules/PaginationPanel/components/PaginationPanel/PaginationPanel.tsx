@@ -10,7 +10,7 @@ export const PaginationPanel = () => {
     const filterBy = useAppSelector(state => state.filtereUsers.filterBy)
     const { limit, currentPage } = useAppSelector(state => state.currentPage)
     const { data } = useGetUsersQuery({ limit: limit, page: currentPage })
-    console.log(data)
+
     const dispatch = useAppDispatch()
 
     const onPageChange = (page: number) => {
